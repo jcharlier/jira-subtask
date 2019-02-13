@@ -1,5 +1,5 @@
 {
-    "jira_base_url": "https://helpdeskmobly.atlassian.net",
+    "jira_base_url": "https://yourjira.atlassian.net",
     "jira_token": "",
     "jira_user": ""
 }

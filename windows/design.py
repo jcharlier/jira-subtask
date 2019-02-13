@@ -129,7 +129,7 @@ class Ui_MainWindow(object):
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
-        MainWindow.setWindowTitle(_translate("MainWindow", "JIRA Worklog Report Generator"))
+        MainWindow.setWindowTitle(_translate("MainWindow", "JIRA Subtask"))
         self.btn_start.setText(_translate("MainWindow", "Iniciar"))
         self.btn_stop.setText(_translate("MainWindow", "Parar"))
         self.stories_label.setText(_translate("MainWindow", "Paste from spreadsheet without header:"))
