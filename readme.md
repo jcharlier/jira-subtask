@@ -20,14 +20,16 @@ Just install them either via your package manager or pip, or anaconda
 Example for ubuntu 18.04:
 ```
 sudo apt install python3-pip
-sudo pip3 install jira PyQt5
+sudo pip3 install jira PyQt5 lxml pandas
 ```
 
 
 or if you use anaconda:
 ```
 conda install -c conda-forge jira
-conda install -c conda-forge qtpy 
+conda install -c conda-forge qtpy
+conda install -c conda-forge lxml
+conda install -c conda-forge pandas
 ```
 You may need to install some other packages depending on your system, but you're on your own with that ;)
 
