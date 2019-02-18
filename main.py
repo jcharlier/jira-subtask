@@ -7,7 +7,7 @@ import json
 import os
 from thread import Thread
 from PyQt5 import QtWidgets, QtGui
-import pandas as pd
+from bs4 import BeautifulSoup, Comment
 from windows import design
 from windows import config
 
@@ -126,15 +126,30 @@ class MainWindow(QtWidgets.QMainWindow, design.Ui_MainWindow):
             self.thread.stop()
             self.thread = None
             return
-
+        task_list = list()
         raw_html = self.stories_data.toHtml()
-        try:
-            data_frame = pd.read_html(raw_html)[0]
-        except  Exception as error:
-            self.add_log_post("{}".format(error))
-            return
-        data_frame.columns = ["parent", "title", "desc", "devpts", "qapts"]
-        self.thread = Thread(data_frame, self.config)
+        html_data = BeautifulSoup(raw_html, features='lxml')
+        for line_break in html_data.find_all("br"):
+            line_break.replace_with("\n")
+
+        for row in html_data.findAll('tr'):
+            cell = row.findAll('td')
+            if len(cell) == 5:
+                task = {
+                    "parent" : cell[0].text.strip('\n'),
+                    "title"  : cell[1].text.strip('\n').replace("\n", " "),
+                    "desc"   : cell[2].text.strip('\n'),
+                    "devpts" : float(cell[3].text.strip('\n') or 0),
+                    "qapts"  : float(cell[4].text.strip('\n')) if cell[4].text.strip('\n') else ""
+                }
+                task_list.append(task)
+            else:
+                self.add_log_post(
+                    "dá uma olhada na sua tabela, todas as linhas tem que ter 5 colunas: \
+                    \n| Parent Story | Title | Description | DEV Points | QA Points |"
+                )
+
+        self.thread = Thread(task_list, self.config)
         self.thread.add_log_post.connect(self.add_log_post)
         self.thread.set_progress_bar.connect(self.set_progress_bar)
         self.thread.finished.connect(self.done)
