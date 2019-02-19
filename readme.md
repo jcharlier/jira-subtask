@@ -20,7 +20,7 @@ Just install them either via your package manager or pip, or anaconda
 Example for ubuntu 18.04:
 ```
 sudo apt install python3-pip
-sudo pip3 install jira PyQt5 lxml pip install beautifulsoup4
+sudo pip3 install jira PyQt5 lxml beautifulsoup4
 ```
 
 
