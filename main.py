@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
-"""This script helps the poor dev lead create subtasks in jira for every new sprint"""
 # -*- coding: utf-8 -*-
 # coding: utf-8
 import sys
 import json
 import os
+import lxml
 from thread import Thread
 from PyQt5 import QtWidgets, QtGui
 from bs4 import BeautifulSoup, Comment
