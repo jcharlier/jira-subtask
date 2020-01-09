@@ -1,10 +1,6 @@
 # -*- coding: utf-8 -*-
 
-<<<<<<< HEAD
 # Form implementation generated from reading ui file 'windows/design.ui'
-=======
-# Form implementation generated from reading ui file '/home/jean.charlier/Mobly/Projetos/jira-subtask/windows/design.ui'
->>>>>>> 5c0480933096807b46681a048bf918187937a0f3
 #
 # Created by: PyQt5 UI code generator 5.12.2
 #
