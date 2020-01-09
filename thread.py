@@ -44,11 +44,13 @@ class Thread(QThread):
                 }
                 try:
                     print("dev")
+                    print(rootnn_dict)
                     child = self.jira.create_issue(fields=rootnn_dict)
                     last_dev_key = child.key
                     self.add_log_post.emit("+-- SubTask Key: {}".format(child.key))
                 except Exception as error:
-                    self.add_log_post("{}".format(error))
+                    self.add_log_post.emit("{}".format(error))
+                    self.stop()
                 self.add_log_post.emit(" ")
 
                 # QA Task
