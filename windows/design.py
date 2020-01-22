@@ -1,10 +1,11 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'windows/design.ui'
+# Form implementation generated from reading ui file 'design.ui'
 #
-# Created by: PyQt5 UI code generator 5.12.2
+# Created by: PyQt5 UI code generator 5.14.1
 #
 # WARNING! All changes made in this file will be lost!
+
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 
@@ -23,6 +24,7 @@ class Ui_MainWindow(object):
         self.verticalLayout_3 = QtWidgets.QVBoxLayout(self.verticalWidget)
         self.verticalLayout_3.setObjectName("verticalLayout_3")
         self.menu_first_area_2 = QtWidgets.QWidget(self.verticalWidget)
+        self.menu_first_area_2.setEnabled(True)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
@@ -35,6 +37,18 @@ class Ui_MainWindow(object):
         self.horizontalLayout.setContentsMargins(-1, -1, 1, -1)
         self.horizontalLayout.setSpacing(6)
         self.horizontalLayout.setObjectName("horizontalLayout")
+        self.project_key_label = QtWidgets.QLabel(self.menu_first_area_2)
+        self.project_key_label.setObjectName("project_key_label")
+        self.horizontalLayout.addWidget(self.project_key_label)
+        self.project_key_text = QtWidgets.QTextEdit(self.menu_first_area_2)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Fixed)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.project_key_text.sizePolicy().hasHeightForWidth())
+        self.project_key_text.setSizePolicy(sizePolicy)
+        self.project_key_text.setMaximumSize(QtCore.QSize(100, 30))
+        self.project_key_text.setObjectName("project_key_text")
+        self.horizontalLayout.addWidget(self.project_key_text)
         spacerItem = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
         self.horizontalLayout.addItem(spacerItem)
         self.btn_start = QtWidgets.QPushButton(self.menu_first_area_2)
@@ -105,7 +119,7 @@ class Ui_MainWindow(object):
         self.verticalLayout.addWidget(self.progress_bar)
         MainWindow.setCentralWidget(self.centralwidget)
         self.menuBar = QtWidgets.QMenuBar(MainWindow)
-        self.menuBar.setGeometry(QtCore.QRect(0, 0, 527, 30))
+        self.menuBar.setGeometry(QtCore.QRect(0, 0, 527, 27))
         self.menuBar.setObjectName("menuBar")
         self.menuMenu = QtWidgets.QMenu(self.menuBar)
         self.menuMenu.setObjectName("menuMenu")
@@ -131,6 +145,7 @@ class Ui_MainWindow(object):
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "JIRA Subtask"))
+        self.project_key_label.setText(_translate("MainWindow", "Project Key"))
         self.btn_start.setText(_translate("MainWindow", "Iniciar"))
         self.btn_stop.setText(_translate("MainWindow", "Parar"))
         self.stories_label.setText(_translate("MainWindow", "Paste from spreadsheet without header:"))
@@ -146,5 +161,3 @@ class Ui_MainWindow(object):
         self.actionCredenciais_JIRA.setShortcut(_translate("MainWindow", "Ctrl+J"))
         self.actionLimpar_Log.setText(_translate("MainWindow", "&Limpar Log"))
         self.actionLimpar_Log.setShortcut(_translate("MainWindow", "Ctrl+L"))
-
-

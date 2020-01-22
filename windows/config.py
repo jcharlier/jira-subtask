@@ -1,10 +1,11 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'windows/config.ui'
+# Form implementation generated from reading ui file 'config.ui'
 #
-# Created by: PyQt5 UI code generator 5.12.2
+# Created by: PyQt5 UI code generator 5.14.1
 #
 # WARNING! All changes made in this file will be lost!
+
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 
@@ -87,5 +88,3 @@ class Ui_ConfigWindow(object):
         self.jira_email_label.setText(_translate("ConfigWindow", "email"))
         self.jira_token_label.setText(_translate("ConfigWindow", "<a href=\"https://id.atlassian.com/manage/api-tokens\">jira token</a>"))
         self.jira_url_label.setText(_translate("ConfigWindow", "jira url"))
-
-

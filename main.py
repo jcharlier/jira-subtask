@@ -22,19 +22,11 @@ class ConfigWindow(QtWidgets.QMainWindow, config.Ui_ConfigWindow):
         self.jira_email_text.setHtml(self.parent.config['jira_user'].strip())
         self.jira_token_text.setHtml(self.parent.config['jira_token'].strip())
         self.jira_url_text.setHtml(self.parent.config['jira_base_url'].strip())
-        self.jira_email_text.textChanged.connect(self._update_config)
-        self.jira_token_text.textChanged.connect(self._update_config)
-        self.jira_url_text.textChanged.connect(self._update_config)
-        self._update_config()
-
-    def _update_config(self):
-        self.parent.config['jira_user'] = str(
-            self.jira_email_text.toPlainText()).strip()
-        self.parent.config['jira_token'] = str(
-            self.jira_token_text.toPlainText()).strip()
-        self.parent.config['jira_base_url'] = str(
-            self.jira_url_text.toPlainText()).strip()
-        self.parent.save_configuration()
+        self.jira_email_text.textChanged.connect(self.parent._update_config)
+        self.jira_token_text.textChanged.connect(self.parent._update_config)
+        self.jira_url_text.textChanged.connect(self.parent._update_config)
+        
+    
 
 
 
@@ -54,7 +46,7 @@ class MainWindow(QtWidgets.QMainWindow, design.Ui_MainWindow):
         self.setWindowIcon(icon)
         self.setupUi(self)
         self.report = None
-        # self.report_date.setDateTime(QDateTime.currentDateTime())
+        
         self.btn_start.disconnect()
         self.btn_start.clicked.connect(self.create_subtasks)
         self.actionCredenciais_JIRA.disconnect()
@@ -64,6 +56,22 @@ class MainWindow(QtWidgets.QMainWindow, design.Ui_MainWindow):
         self._load_configuration()
         self.thread = None
         self.config_window = ConfigWindow(self)
+        self.project_key_text.textChanged.connect(self._update_config)
+        self.project_key_text.setHtml(self.config['project_key'].strip())
+        self._update_config()
+
+
+    def _update_config(self):
+        self.config['jira_user'] = str(
+            self.config_window.jira_email_text.toPlainText()).strip()
+        self.config['jira_token'] = str(
+            self.config_window.jira_token_text.toPlainText()).strip()
+        self.config['jira_base_url'] = str(
+            self.config_window.jira_url_text.toPlainText()).strip()
+        self.config['project_key'] = str(
+            self.project_key_text.toPlainText()).strip()
+
+        self.save_configuration()    
 
     def _load_configuration(self):
         if os.path.isfile(self.config_file_path):
@@ -85,7 +93,9 @@ class MainWindow(QtWidgets.QMainWindow, design.Ui_MainWindow):
                 self.config = {
                     "jira_base_url": "https://helpdeskmobly.atlassian.net",
                     "jira_token": "",
-                    "jira_user": ""}
+                    "jira_user": "",
+                    "project_key":""
+                    }
             else:
                 with open(
                     os.path.join(
@@ -97,8 +107,8 @@ class MainWindow(QtWidgets.QMainWindow, design.Ui_MainWindow):
                     with open(self.config_file_path, 'w') as config_file:
                         json.dump(self.config, config_file,
                                   sort_keys=True, indent=4)
-
-        with open(self.config_file_path, 'r+') as config_file:
+        
+        with open(self.config_file_path, 'w') as config_file:
             json.dump(self.config, config_file, sort_keys=True, indent=4)
 
     def show_configcred(self):

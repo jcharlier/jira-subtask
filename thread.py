@@ -23,6 +23,10 @@ class Thread(QThread):
     def run(self):
         ''' main process that reads task list, connects to jira, and creates
         every DEV and QA task'''
+        if not self.config['project_key']:
+            self.add_log_post.emit("Por favor defina uma chave de projeto")
+            self.stop()
+
         self.add_log_post.emit(u'Conectando no Jira...')
         self.jira = JIRA(self.options, basic_auth=(
             self.config['jira_user'], self.config['jira_token']))
@@ -35,7 +39,7 @@ class Thread(QThread):
                 self.add_log_post.emit("+-- Points: {}".format(task["devpts"]))
                 self.add_log_post.emit("+-- Descri: {}".format(task["desc"]))
                 rootnn_dict = {
-                    'project': {'key': 'PPER'},
+                    'project': {'key': self.config["project_key"]},
                     'summary': "DEV - {}".format(str(task["title"])),
                     'description': str(task["desc"]),
                     'customfield_10004': int(task["devpts"]),
@@ -61,7 +65,7 @@ class Thread(QThread):
                 self.add_log_post.emit("+-- Points: {}".format(task["qapts"]))
                 self.add_log_post.emit("+-- Descri: {}".format(task["desc"]))
                 rootnn_dict = {
-                    'project': {'key': 'PPER'},
+                    'project': {'key': self.config["project_key"]},
                     'summary': "QA - {}".format(str(task["title"])),
                     'description': str(task["desc"]),
                     'customfield_10004': int(task["qapts"]),
